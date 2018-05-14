@@ -1,0 +1,259 @@
+<div id="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="events-listing-item-detail">
+                    <div class="row team">
+                        <div class="col-md-7">
+                            <div class="events-listing-item-detail-img" [ngStyle]="{'background-image': 'url(' + post?.background + ')'}">
+                            </div>
+                        </div>
+                        <div class="col-md-5 profile">
+
+                            <div class="profile-desc">
+                                <div class="row">
+                                    <div class="col-md-12 heading">
+                                        <h2 class="title text-center">{{post?.name}}</h2>
+                                        <a *ngIf="userInfo.user_id === post.user_id" class="edit" routerLink="/edit-event/{{post.id}}">Edit</a>
+                                    </div>
+                                    <table width="100%">
+                                        <tr>
+                                            <td valign="bottom" style='padding:10px'>
+                                                <div class="profile-desc-item">
+                                                    {{post?.date_at | date:"short"}}
+                                                    <br /> {{ post?.location.description }}
+                                                    <br /> Contacts: {{ post?.contact_info }}
+                                                </div>
+                                            </td>
+                                            <td valign="bottom" style='padding:10px'>
+                                                <div class="organisation-logo">
+                                                    <div>
+                                                        <img class="img-responsive" src="{{post?.logo}}"/>
+                                                    </div>
+                                                    {{post?.location.name}}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                                    aria-valuemax="100" [ngStyle]="{'width': post?.pcAchieved + '%'}">
+                                    <span>{{post?.achieved}} / {{post?.amount}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row profile">
+            <div class="col-md-6 profile-fulldesc">
+                <h3>Player Background and Info:</h3>
+                <p>{{post?.description}}</p>
+            </div>
+            <div class="col-md-6 profileActionBtn">
+               <!--  <a class="link-btn lg-btn blue-btn" href="#">Request to join team</a> -->
+                <a class="link-btn lg-btn red-btn" (click)="hidden_donate = false"> donate now</a>
+            <!--    <a class="link-btn lg-btn green-btn" href="#">share
+                    <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                </a> -->
+            </div>
+        </div>
+
+        <div class="row players-list events-listing-detail-listing">
+            <div class="col-md-4">
+                <div class="players">
+                    <div class="players-img" style="background-image: url(assets/images/temp/event-detail/event-details-page-1.jpg)"></div>
+                    <h2>Orange County SC</h2>
+                    <div class="players-desc">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                            ut aliquip ...</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                            aria-valuemax="100" style="width: 90%">
+                            Goal achieved
+                        </div>
+                    </div>
+                    <div class="players-btn text-center">
+                        <a class="link-btn blue-btn " href="#">join</a>
+                        <a class="link-btn green-btn" href="#">share</a>
+                        <a class="link-btn red-btn " (click)="hidden_donate = false">Donate</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="players">
+                    <div class="players-img" style="background-image: url(assets/images/temp/event-detail/event-details-page-2.jpg)"></div>
+                    <h2>Atlanta United FC</h2>
+                    <div class="players-desc">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                            ut aliquip ...</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                            aria-valuemax="150" style="width: 50%">
+                            $75
+                        </div>
+                        <div class="progress-finish">$150</div>
+                    </div>
+                    <div class="players-btn text-center">
+                        <a class="link-btn blue-btn " href="#">join</a>
+                        <a class="link-btn green-btn" href="#">share</a>
+                        <a class="link-btn red-btn " (click)="hidden_donate = false">Donate</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="players">
+                    <div class="players-img" style="background-image: url(assets/images/temp/event-detail/event-details-page-3.jpg)"></div>
+                    <h2>Dallas</h2>
+                    <div class="players-desc">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                            ut aliquip ...</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                            aria-valuemax="100" style="width: 90%">
+                            Goal achieved
+                        </div>
+                    </div>
+                    <div class="players-btn text-center">
+                        <a class="link-btn blue-btn " href="#">join</a>
+                        <a class="link-btn green-btn" href="#">share</a>
+                        <a class="link-btn red-btn " (click)="hidden_donate = false">Donate</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="players">
+                    <div class="players-img" style="background-image: url(assets/images/temp/event-detail/event-details-page-4.jpg)"></div>
+                    <h2>North American League</h2>
+                    <div class="players-desc">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                            ut aliquip ...</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                            aria-valuemax="150" style="width: 100%">
+                            $200
+                        </div>
+                        <div class="progress-finish">$200</div>
+                    </div>
+                    <div class="players-btn text-center">
+                        <a class="link-btn blue-btn " href="#">join</a>
+                        <a class="link-btn green-btn" href="#">share</a>
+                        <a class="link-btn red-btn " (click)="hidden_donate = false">Donate</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="players">
+                    <div class="players-img" style="background-image: url(assets/images/temp/event-detail/event-details-page-5.jpg)"></div>
+                    <h2>Portland Timbers</h2>
+                    <div class="players-desc">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                            ut aliquip ...</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                            aria-valuemax="150" style="width: 50%">
+                            $75
+                        </div>
+                        <div class="progress-finish">$150</div>
+                    </div>
+                    <div class="players-btn text-center">
+                        <a class="link-btn blue-btn " href="#">join</a>
+                        <a class="link-btn green-btn" href="#">share</a>
+                        <a class="link-btn red-btn " (click)="hidden_donate = false">Donate</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="players">
+                    <div class="players-img" style="background-image: url(assets/images/temp/event-detail/event-details-page-6.jpg)"></div>
+                    <h2>Swope Park Rangers</h2>
+                    <div class="players-desc">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                            ut aliquip ...</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                            aria-valuemax="150" style="width: 50%">
+                            $75
+                        </div>
+                        <div class="progress-finish">$150</div>
+                    </div>
+                    <div class="players-btn text-center">
+                        <a class="link-btn blue-btn " href="#">join</a>
+                        <a class="link-btn green-btn" href="#">share</a>
+                        <a class="link-btn red-btn " (click)="hidden_donate = false">Donate</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="link-btn gray-btn" (click)="openCheckout()">Load More</a>
+            </div>
+        </div>
+
+        <div class="row gallery-list">
+            <div class="col-md-12">
+                <h3 class="title">Photo and Video Gallery</h3>
+            </div>
+            <div class="col-md-4">
+                <div class="gallery">
+                    <a href="#" class="gallery-img" style="background-image: url(assets/images/temp/gallery/gallery1.jpg)"></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="gallery">
+                    <a href="#" class="gallery-img" style="background-image: url(assets/images/temp/gallery/gallery2.jpg)"></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="gallery">
+                    <a href="#" class="gallery-img" style="background-image: url(assets/images/temp/gallery/gallery3.jpg)"></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="gallery">
+                    <a href="#" class="gallery-img" style="background-image: url(assets/images/temp/gallery/gallery4.jpg)"></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="gallery">
+                    <a href="#" class="gallery-img" style="background-image: url(assets/images/temp/gallery/gallery5.jpg)"></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="gallery">
+                    <a href="#" class="gallery-img" style="background-image: url(assets/images/temp/gallery/gallery6.jpg)"></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="link-btn gray-btn" href="#">Load More</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--page-content-->
+
+<div class="modal-donate-wrap" [hidden]="hidden_donate" (click)="toggle($event)">
+    <div class="modal-donate-content">
+        <app-donate (closed)="close_donate($event)" [eventId]="id"></app-donate>
+    </div>
+    
+</div>

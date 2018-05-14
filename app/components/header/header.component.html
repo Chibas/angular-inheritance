@@ -1,0 +1,38 @@
+<header style="background-image: url(assets/images/bg-header.jpg)">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="header-search header-top-search">
+                  <input type="text" name="search" placeholder="Events/Teams/Players" />
+              </div>
+              <h1>
+                {{title}}
+              </h1>
+          </div>
+      </div>
+      <div class="row header-menu">
+          <div class="col-md-12">
+
+              <a class="link-btn lg-btn red-btn" [routerLink]="['/add-event']" >Host an event!</a>
+              <!--<a class="link-btn lg-btn blue-btn"  href="#" data-toggle="modal" data-target="#actionTeam">Team up!</a> -->
+              <a class="event-info-btn new-event" [routerLink]="['/events']" style=" margin-left: 40px;">Events <span>{{postsAmount}}</span></a>
+              <!--<a class="event-info-btn new-event" href="#">Invitations <span>25</span></a>
+              <a class="event-info-btn" href="#">Statistics</a> -->
+
+              <a class="profile-btn" (click)="logout();">
+                  <i class="fa fa-sign-out" aria-hidden="true"></i><br />
+                  Log Out
+              </a>
+              <a class="profile-btn red" [routerLink]="['/profile/' + user_id ]">
+                  <i class="fa fa-user-circle-o" aria-hidden="true"></i><br />
+                  Profile
+              </a>
+
+              <!--<div class="header-search">
+                   <input type="text" name="search" placeholder="Events/Teams/Players" /> 
+              </div>-->
+
+          </div>
+      </div>
+  </div>
+</header><!--header-->

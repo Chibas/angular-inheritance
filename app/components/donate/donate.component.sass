@@ -1,0 +1,83 @@
+/*FORM */
+
+form, .bg
+  display: block
+  background-color: rgba(255, 255, 255, 0.8)
+  padding: 20px 10px
+  text-align: left
+  -webkit-border-radius: 9px
+  -moz-border-radius: 9px
+  border-radius: 9px
+
+form
+  h3
+    font-size: 32px
+    color: #002469
+    font-weight: bold
+    text-transform: uppercase
+    text-align: center
+    margin: 0 0 20px
+  label
+    font-size: 18px
+    font-weight: bold
+    color: #002469
+    margin: 0
+  select option
+    padding: 3px 15px
+  input[type="text"], textarea, select
+    border: 1px solid #b52235 !important
+  .form-group
+    margin: 0 0 5px 0 !important
+
+button[type="submit"]
+  &:hover, &:focus
+    background-color: #b52235
+    color: #fff
+
+.learnmore:hover
+  background-color: #b52235
+  color: #fff
+
+button 
+  &:hover
+    cursor: pointer
+
+button[type="submit"]
+  background-color: #002469
+  color: #fff
+  border: 0 none
+  font-size: 22px
+  font-weight: bold
+  text-transform: uppercase
+  display: inline-block
+  height: 36px
+  line-height: 36px
+  width: 120px
+  padding: 0
+  margin: 20px 0
+  &:focus
+    background-color: #002469
+    color: #fff
+
+.cancel 
+  font-size: 22px
+  text-transform: uppercase
+  display: inline-block
+  height: 36px
+  line-height: 36px
+  width: 120px
+  padding: 0
+  margin: 20px 0
+
+.form_buttons
+  display: flex
+  justify-content: space-between
+  padding: 0 15px
+
+
+.ng-invalid.ng-touched
+  border: 1px solid red
+
+.help-block 
+  color: red
+  height: 20px

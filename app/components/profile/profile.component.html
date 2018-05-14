@@ -1,0 +1,303 @@
+<div id="page-content">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-8">
+
+              <div class="profile row">
+	              <form [formGroup]="profileForm" #formProfile="ngForm" (ngSubmit)="submit(profileForm.valid && profileForm)" novalidate>
+		              <mat-card>
+			              <mat-card-header>
+				              <h2>Your profile</h2>
+			              </mat-card-header>
+			              <mat-card-content>
+			                  <div class="col-sm-4">
+				                  <label for="profileImage">
+					                  <img [src]="profile_img" alt="">
+					                  <input type="file" id="profileImage" (change)="fileChangeListener($event)"/>
+				                  </label>
+			                  </div>
+			                  <div class="col-sm-8">
+			                      <div class="profile-desc">
+			                            <mat-accordion>
+			                              <mat-expansion-panel>
+			                                  <mat-expansion-panel-header>
+			                                      <mat-panel-title>
+			                                          Full name:
+			                                      </mat-panel-title>
+			                                      <mat-panel-description>
+			                                          {{profile?.firstName}} {{profile?.lastName}}
+			                                      </mat-panel-description>
+			                                  </mat-expansion-panel-header>
+
+			                                  <mat-form-field [formGroup]="profileForm" class="double">
+			                                      <input formControlName="firstName" matInput placeholder="First name">
+				                                  <mat-error *ngIf="profileForm.controls['firstName'].invalid">Please enter your first name</mat-error>
+			                                  </mat-form-field>
+
+			                                  <mat-form-field [formGroup]="profileForm" class="double">
+			                                      <input formControlName="lastName" matInput placeholder="Last name">
+				                                  <mat-error *ngIf="profileForm.controls['lastName'].invalid">Please enter your last name</mat-error>
+			                                  </mat-form-field>
+			                              </mat-expansion-panel>
+			                              <mat-expansion-panel>
+			                                  <mat-expansion-panel-header>
+			                                      <mat-panel-title>
+			                                          Date of birth:
+			                                      </mat-panel-title>
+			                                      <mat-panel-description>
+			                                          {{profile?.dob}}
+			                                      </mat-panel-description>
+			                                  </mat-expansion-panel-header>
+
+			                                  <mat-form-field [formGroup]="profileForm">
+			                                      <input formControlName="dob" matInput [matDatepicker]="picker" placeholder="Choose a date">
+				                                  <mat-error *ngIf="profileForm.controls['dob'].invalid">Please enter your date of birth</mat-error>
+			                                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+			                                      <mat-datepicker #picker></mat-datepicker>
+			                                  </mat-form-field>
+			                              </mat-expansion-panel>
+				                          <mat-expansion-panel>
+					                          <mat-expansion-panel-header>
+						                          <mat-panel-title>
+							                          Location:
+						                          </mat-panel-title>
+						                          <mat-panel-description>
+							                          {{profile?.location}}
+						                          </mat-panel-description>
+					                          </mat-expansion-panel-header>
+
+					                          <mat-form-field [formGroup]="profileForm">
+						                          <input formControlName="location" matInput placeholder="Enter your location">
+						                          <mat-error *ngIf="profileForm.controls['location'].invalid">Please enter your location</mat-error>
+					                          </mat-form-field>
+				                          </mat-expansion-panel>
+				                          <mat-expansion-panel>
+					                          <mat-expansion-panel-header>
+						                          <mat-panel-title>
+							                          Institution:
+						                          </mat-panel-title>
+						                          <mat-panel-description>
+							                          {{profile?.institution}}
+						                          </mat-panel-description>
+					                          </mat-expansion-panel-header>
+
+					                          <mat-form-field [formGroup]="profileForm">
+						                          <input formControlName="institution" matInput placeholder="Enter your institution">
+						                          <mat-error *ngIf="profileForm.controls['institution'].invalid">Please enter your institution</mat-error>
+					                          </mat-form-field>
+				                          </mat-expansion-panel>
+				                          <mat-expansion-panel>
+					                          <mat-expansion-panel-header>
+						                          <mat-panel-title>
+							                          Team:
+						                          </mat-panel-title>
+						                          <mat-panel-description>
+							                          {{profile?.team}}
+						                          </mat-panel-description>
+					                          </mat-expansion-panel-header>
+
+					                          <mat-form-field [formGroup]="profileForm">
+						                          <input formControlName="team" matInput placeholder="Enter your team name">
+						                          <mat-error *ngIf="profileForm.controls['team'].invalid">Please enter your team name</mat-error>
+					                          </mat-form-field>
+				                          </mat-expansion-panel>
+			                          </mat-accordion>
+			                      </div>
+			                  </div>
+			                  <div class="col-md-12 profile-fulldesc">
+				                  <mat-card-footer>
+					                  <mat-expansion-panel>
+						                  <mat-expansion-panel-header class="description">
+							                  <mat-panel-title>
+								                  Player background and info:
+							                  </mat-panel-title>
+							                  <mat-panel-description>
+								                  {{profile?.description}}
+							                  </mat-panel-description>
+						                  </mat-expansion-panel-header>
+
+						                  <mat-form-field [formGroup]="profileForm">
+							                  <textarea formControlName="description" matInput placeholder="Enter your profile description"></textarea>
+							                  <mat-error *ngIf="profileForm.controls['description'].invalid">Please enter your profile description</mat-error>
+						                  </mat-form-field>
+					                  </mat-expansion-panel>
+				                  </mat-card-footer>
+				                  <mat-card-actions *ngIf="formProfile.touched">
+					                  <button mat-button [disabled]="formProfile.invalid">Save</button>
+					                  <button mat-button (click)="cancel($event)">Cancel</button>
+				                  </mat-card-actions>
+			                  </div>
+			              </mat-card-content>
+		              </mat-card>
+	              </form>
+              </div>
+
+	          <div class="cropWrap" [hidden]="!showCropModal">
+					<mat-card>
+						<div class="images-wrap">
+							<div class="img-container">
+								<img id="newImg" [src]="cropImgLink" alt="Picture" (load)="create($event, preview)">
+							</div>
+							<div id="preview" #preview > </div>
+							<div class="modalActions">
+								<button (click)="setImage()">OK</button>
+								<button (click)="showCropModal = !showCropModal">Cancel</button>
+							</div>
+						</div>
+					</mat-card>
+	          </div>
+
+              <h4 class="events-group-title">Events Attending</h4>
+              <div class="events-group-open clearfix">
+                  <div class="events-group-desc">
+                      <h2>Next Event Attending</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullam</p>
+                      <div class="progress">
+                          <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="150" style="width: 50%">
+                              $75
+                          </div>
+                          <div class="progress-finish">$150</div>
+                      </div>
+                      <div class="event-btn">
+                          <a class="link-btn red-btn" href="#">Donate</a>
+                          <a class="link-btn green-btn pull-right" href="#">share <i class="fa fa-share-square-o" aria-hidden="true"></i></a>
+                      </div>
+                  </div>
+                  <div class="events-group-img" style="background-image: url(assets/images/temp/event/event-open1.jpg)"></div>
+              </div>
+              <div class="events-group-open clearfix">
+                  <div class="events-group-desc">
+                      <h2>Next Event Attending</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullam</p>
+                      <div class="progress">
+                          <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="150" style="width: 100%">
+                              $200
+                          </div>
+                          <div class="progress-finish">$200</div>
+                      </div>
+                      <div class="event-btn">
+                          <a class="link-btn red-btn" href="#">Donate</a>
+                          <a class="link-btn green-btn pull-right" href="#">share <i class="fa fa-share-square-o" aria-hidden="true"></i></a>
+                      </div>
+                  </div>
+                  <div class="events-group-img" style="background-image: url(assets/images/temp/event/event-open2.jpg)"></div>
+              </div>
+
+              <h4 class="events-group-title">Events Attended</h4>
+              <div class="events-group-close clearfix">
+                  <div class="events-group-img" style="background-image: url(assets/images/temp/event/event-close1.jpg)"></div>
+                  <div class="events-group-desc">
+                      <div>
+                          <div>
+                              <div>
+                                  <table>
+                                      <tr>
+                                          <td><strong>Description:</strong></td>
+                                          <td>Lorem ipsum </td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>Location:</strong></td>
+                                          <td>Example City</td>
+                                      </tr>
+                                  </table>
+                              </div>
+                              <div>
+                                  <table>
+                                      <tr>
+                                          <td><strong>Total rased:</strong></td>
+                                          <td>Lorem ipsum </td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>Position:</strong></td>
+                                          <td>Lorem ipsum</td>
+                                      </tr>
+                                  </table>
+                              </div>
+                              <div>
+                                  <div class="count">$300 <div class="place pull-right"><img src="assets/images/medal.png" /> 1<sup>st</sup></div></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="events-group-close clearfix">
+                  <div class="events-group-img" style="background-image: url(assets/images/temp/event/event-close2.jpg)"></div>
+                  <div class="events-group-desc">
+                      <div>
+                          <div>
+                              <div>
+                                  <table>
+                                      <tr>
+                                          <td><strong>Description:</strong></td>
+                                          <td>Lorem ipsum </td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>Location:</strong></td>
+                                          <td>Example City</td>
+                                      </tr>
+                                  </table>
+                              </div>
+                              <div>
+                                  <table>
+                                      <tr>
+                                          <td><strong>Total rased:</strong></td>
+                                          <td>Lorem ipsum </td>
+                                      </tr>
+                                      <tr>
+                                          <td><strong>Position:</strong></td>
+                                          <td>Lorem ipsum</td>
+                                      </tr>
+                                  </table>
+                              </div>
+                              <div>
+                                  <div class="count">$200 <div class="place pull-right"><img src="assets/images/medal.png" /> 2<sup>nd</sup></div></div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+          <div class="col-md-4">
+              <div class="events-list">
+                  <div class="event">
+                      <div class="event-img" style="background-image: url(assets/images/temp/event/event1.jpg)"></div>
+                      <h2>Upcoming Event</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                      <div class="event-btn">
+                          <a class="link-btn red-btn" href="#">join</a>
+                          <a class="link-btn green-btn pull-right" href="#">share <i class="fa fa-share-square-o" aria-hidden="true"></i></a>
+                      </div>
+                  </div>
+                  <div class="event">
+                      <div class="event-img" style="background-image: url(assets/images/temp/event/event2.jpg)"></div>
+                      <h2>Upcoming Event</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                      <div class="event-btn">
+                          <a class="link-btn red-btn" href="#">join</a>
+                          <a class="link-btn green-btn pull-right" href="#">share <i class="fa fa-share-square-o" aria-hidden="true"></i></a>
+                      </div>
+                  </div>
+                  <div class="event">
+                      <div class="event-img" style="background-image: url(assets/images/temp/event/event3.jpg)"></div>
+                      <h2>Upcoming Event</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                      <div class="event-btn">
+                          <a class="link-btn red-btn" href="#">join</a>
+                          <a class="link-btn green-btn pull-right" href="#">share <i class="fa fa-share-square-o" aria-hidden="true"></i></a>
+                      </div>
+                  </div>
+                  <div class="event">
+                      <div class="event-img" style="background-image: url(assets/images/temp/event/event4.jpg)"></div>
+                      <h2>Upcoming Event</h2>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                      <div class="event-btn">
+                          <a class="link-btn red-btn" href="#">join</a>
+                          <a class="link-btn green-btn pull-right" href="#">share <i class="fa fa-share-square-o" aria-hidden="true"></i></a>
+                      </div>
+                  </div>
+              </div><!--events list-->
+          </div>
+      </div>
+  </div>
+</div><!--page-content-->

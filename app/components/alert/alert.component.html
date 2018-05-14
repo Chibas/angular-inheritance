@@ -1,0 +1,10 @@
+<div *ngIf="alerts.length != 0" class="modal-wrap modal_show">
+  <div class="modal-status">
+    <div class="modal-main" *ngFor="let alert of alerts; let i = index">
+      {{alert.message}}
+    </div>
+    <div class="modal-footer">
+      <button (click)="removeAlert(i);">Close</button>
+    </div>
+  </div>
+</div>

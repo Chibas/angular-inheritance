@@ -1,0 +1,75 @@
+.profile
+	.profile-desc
+		.profile-desc-item
+			font-size: 18px
+			color: #012967
+			font-weight: bold
+			line-height: 1
+
+.mat-card
+	display: inline-block
+
+.mat-form-field
+	width: 100%
+
+.mat-form-field.double
+	width: unset
+
+.mat-expansion-panel-header.description
+	height: max-content!important
+	padding: 15px 10px
+
+.mat-card-footer
+	margin: 20px 0
+
+.mat-card-actions
+	display: flex
+	justify-content: space-between
+	margin-left: 0
+	margin-right: 0
+
+h2
+	margin-bottom: 30px
+
+
+.cropWrap
+	position: fixed
+	top: 0
+	left: 0
+	right: 0
+	bottom: 0
+	background: rgba(0,0,0, .9)
+	display: flex
+	justify-content: space-around
+	z-index: 100
+	.modalActions
+		display: flex
+		justify-content: space-between
+		align-items: center
+	button
+		display: block
+		padding: 10px 15px
+		border: none
+
+.img-container, #preview
+	width: 300px
+	height: 300px
+	border: 1px solid #333
+	img
+		max-width: 100%
+
+#preview
+	display: inline-block
+	position: relative
+	overflow: hidden
+
+input[type="file"]
+	display: none
+
+label
+	img
+		max-width: 210px
+		max-heigt: 210px
+
+div[hidden]
+	display: none

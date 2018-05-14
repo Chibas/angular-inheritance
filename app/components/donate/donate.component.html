@@ -1,0 +1,76 @@
+<!-- DONATION FORM -->
+<form id="donate-form" class="form-horizontal clearfix" [formGroup]="donateForm" #formDonate="ngForm"
+      (ngSubmit)="donateForm.valid && submit(donateForm)" novalidate>
+  <h3>Donation form</h3>
+
+  <div class="form-group field-amount col-sm-5">
+    <label for="amount">Amount<sup>*</sup></label>
+    <input type="tel" id="amount" class="form-control" name="amount"
+           formControlName="amount" currencyMask [options]="{ prefix: '$ ', thousands: ',', decimal: '.' }">
+    <div class="help-block">
+      <small *ngIf="donateForm.controls['amount'].invalid &&
+                            (donateForm.controls['amount'].dirty ||
+                            donateForm.controls['amount'].touched)">
+        Please enter donation amount
+      </small>
+      <small class="error" *ngIf="Errors.amount != '' ">
+        {{ Errors.cardNumber }}
+      </small>
+    </div>
+  </div>
+  <div class="form-group field-cardnumber col-sm-7">
+    <label for="cardnumber">Credit Card Number<sup>*</sup></label>
+    <input class="form-control" id="cardnumber" placeholder="XXXX XXXX XXXX XXXX" formControlName="creditCard"
+           type="tel" autocomplete="cc-number" ccNumber>
+    <div class="help-block">
+      <small *ngIf="donateForm.controls['creditCard'].invalid &&
+                            (donateForm.controls['creditCard'].dirty ||
+                            donateForm.controls['creditCard'].touched)">
+        Enter a credit card number
+      </small>
+      <small class="error" *ngIf="Errors.cardNumber != '' ">
+        {{ Errors.cardNumber }}
+      </small>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+
+  <div class="form-group field-expirationyear col-sm-6">
+    <label for="expirationyear">Expiration Date<sup>*</sup></label>
+    <input id="expirationyear" class="form-control" placeholder="MM/YYYY" formControlName="expirationDate" type="tel"
+           autocomplete="cc-exp" ccExp>
+    <div class="help-block">
+      <small *ngIf="donateForm.controls['expirationDate'].invalid &&
+                        (donateForm.controls['expirationDate'].dirty || 
+                        donateForm.controls['expirationDate'].touched)">
+        Enter card expiration date
+      </small>
+      <small class="error" *ngIf="(Errors.expirationMonth != '') || (Errors.expirationYear)">
+        {{ Errors.expirationMonth }} {{Errors.expirationYear}}
+      </small>
+    </div>
+  </div>
+  <div class="form-group field-cvv col-sm-6">
+    <label for="cvv">CVV/CVC<sup>*</sup></label>
+    <input type="text" class="form-control" id="cvv" placeholder="XXX" formControlName="cvc" type="tel"
+           autocomplete="cc-cvc" ccCVC>
+    <div class="help-block">
+      <small *ngIf="donateForm.controls['cvc'].invalid &&
+                            (donateForm.controls['cvc'].dirty ||
+                            donateForm.controls['cvc'].touched)">
+        Enter CVC code from the back side of card
+      </small>
+      <small class="error" *ngIf="Errors.cvv != ''">
+        {{ Errors.cvv }}
+      </small>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="form_buttons">
+    <button type="submit" class="btn btn-default">Send</button>
+    <button class="btn btn-default cancel" (click)="close(false)">Cancel</button>
+  </div>
+
+</form>
+<!-- END DONATION FORM -->
+            

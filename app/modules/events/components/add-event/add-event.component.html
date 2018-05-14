@@ -1,0 +1,141 @@
+<div id="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="form-wrap">
+            <form [formGroup]="eventForm" #formEvent="ngForm" name="EventForm" (ngSubmit)="eventForm.valid && submit(eventForm)" novalidate>
+              <div class="col-md-7">
+                <div>
+                  <img-cropper [image]="background" [src]="images.background" [settings]="backgroundCropper" (onCrop)="cropped($event)"></img-cropper>
+                  <span class="result" *ngIf="background.image">
+                    <img [src]="background.image"
+                         [width]="croppedWidth"
+                         [height]="croppedHeight" style="max-width: 645px; max-height: 322px">
+                  </span>
+                </div>
+                <small class="error" *ngIf="Errors.background != '' ">
+                  {{ Errors.background }}
+                </small>
+                <small class="error"
+                       *ngIf="eventForm.controls['background'].invalid && (eventForm.controls['background'].touched || formEvent.submitted)">
+                  Please add your event Promo img
+                </small>
+              </div>
+
+              <div class="col-md-5 inputs">
+                <label for="event_name_input">Event Name</label>
+                <input id="event_name_input" name="EventForm[name]" formControlName="name"/>
+                <small class="error" *ngIf="Errors.name != '' ">
+                  {{ Errors.name }}
+                </small>
+                <small class="error"
+                       *ngIf="eventForm.controls['name'].invalid && (eventForm.controls['name'].touched || formEvent.submitted)">
+                  Please enter your event name(minimum 5 symbols)
+                </small>
+                <div class="row">
+                  <div class="col-md-8 inputs">
+                    <label for="event_date_input">Event Date / Time</label>
+                    <div class="input-control">
+                      <owl-date-time id="event_date_input" name="EventForm[date_at]" formControlName="date_at"
+                                     [hourFormat]="'12'" [dateFormat]="'MM/DD/YYYY hh:mm a'" [dataType]="'string'"
+                                     [showButtons]="true" [placeHolder]="'MM/DD/YYYY hh:mm a'"></owl-date-time>
+                    </div>
+                    <small class="error" *ngIf="Errors.date_at != '' ">
+                      {{ Errors.date_at }}
+                    </small>
+                    <small class="error"
+                           *ngIf="eventForm.controls['date_at'].invalid && (eventForm.controls['date_at'].touched || formEvent.submitted)">
+                      Please enter your event date
+                    </small>
+
+                    <label for="event_location_input">Location</label>
+                    <input id="event_location_input" name="EventForm[location]" formControlName="location"/>
+                    <small class="error" *ngIf="Errors.location != '' ">
+                      {{ Errors.location }}
+                    </small>
+                    <small class="error"
+                           *ngIf="eventForm.controls['location'].invalid && (eventForm.controls['location'].touched || formEvent.submitted)">
+                      Please enter your event location(minimum 10 symbols)
+                    </small>
+
+                    <label for="event_institution_input">Institution(School or organization)</label>
+                    <input id="event_institution_input" name="EventForm[location_description]"
+                           formControlName="location_description"/>
+                    <small class="error" *ngIf="Errors.location_description != '' ">
+                      {{ Errors.location_description }}
+                    </small>
+                    <small class="error"
+                           *ngIf="eventForm.controls['location_description'].invalid && (eventForm.controls['location_description'].touched || formEvent.submitted)">
+                      Please enter your institution(minimum 10 symbols)
+                    </small>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="add_logo">
+                      <img-cropper [image]="logo" [settings]="logoCropper" (onCrop)="cropped($event)"
+                      [src]="images.logo"></img-cropper>
+                      <span class="result" *ngIf="logo.image">
+                        <img [src]="logo.image"
+                             [width]="croppedWidth"
+                             [height]="croppedHeight" style="max-width: 132px; max-height: 138px">
+                      </span>
+                    </div>
+                    <small class="error" *ngIf="Errors.logo != '' ">
+                      {{ Errors.logo }}
+                    </small>
+                    <small class="error"
+                           *ngIf="eventForm.controls['logo'].invalid && (eventForm.controls['logo'].touched || formEvent.submitted)">
+                      Please add event logo
+                    </small>
+                  </div>
+                </div>
+
+                <label for="event_date_input">Goal Achieved</label>
+                <input id="event_goal_input" name="EventForm[amount]" formControlName="amount" currencyMask [(ngModel)]="value" [options]="{ prefix: '$ ', thousands: ',', decimal: '.' }" />
+                <small class="error" *ngIf="Errors.amount != '' ">
+                  {{ Errors.amount }}
+                </small>
+                <small class="error"
+                       *ngIf="eventForm.controls['amount'].invalid && (eventForm.controls['amount'].touched || formEvent.submitted)">
+                  Please enter your event goal
+                </small>
+
+                <label for="event_date_input">Contact info</label>
+                <textarea id="event_contacts_input" name="EventForm[contact_info]" formControlName="contact_info"
+                          cols="30"
+                          rows="10"></textarea>
+                <small class="error" *ngIf="Errors.contact_info != '' ">
+                  {{ Errors.contact_info }}
+                </small>
+                <small class="error"
+                       *ngIf="eventForm.controls['contact_info'].invalid && (eventForm.controls['contact_info'].touched || formEvent.submitted)">
+                  Please enter your event contact info(minimum 5 symbols)
+                </small>
+
+              </div>
+              <div class="col-md-12 background_block">
+                <label for="event_background">Background and Info</label>
+                <textarea name="EventForm[description]" id="event_background" formControlName="description"
+                          cols="30"
+                          rows="4"></textarea>
+                <small class="error" *ngIf="Errors.description != '' ">
+                  {{ Errors.description }}
+                </small>
+                <small class="error"
+                       *ngIf="eventForm.controls['description'].invalid && (eventForm.controls['description'].touched || formEvent.submitted)">
+                  Please enter your event background(minimum 40 symbols)
+                </small>
+              </div>
+              <div class="col-md-12  save_btn">
+                <button class="link-btn green-btn">SAVE</button>
+                <button class="btn cancel" (click)="cancel($event)"> Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>   <!-- row end -->
+
+
+    </div>
+  </div>
+</div><!--page-content-->

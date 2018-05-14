@@ -1,0 +1,57 @@
+<div class="header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <a class="logo" [routerLink]="['/']">
+          <img src="assets/images/logo.png"/>
+        </a>
+      </div>
+      <div class="col-md-7 col-md-offset-1">
+        <form name="LoginForm" class="login-form clearfix" #loginForm="ngForm"
+              (ngSubmit)="loginForm.form.valid && login()" novalidate>
+          <div class="form-group col-md-5">
+            <label for="username">Username/Email</label>
+            <input type="email" class="form-control w-help-block"
+                   [ngClass]="{'field_invalid' : username.invalid && (username.dirty || username.touched)}"
+                   id="username" name="LoginForm[username]" mdInput placeholder="Username/Email"
+                   [(ngModel)]="model.username" #username="ngModel" required>
+            <small class="error" *ngIf="Errors.username != '' ">
+              {{ Errors.username }}
+            </small>
+          </div>
+          <div class="form-group w-help-block col-md-5">
+            <label for="password">Password</label>
+            <input type="password" class="form-control"
+                   [ngClass]="{'field_invalid' : password.invalid && (password.dirty || password.touched)}"
+                   id="password" name="LoginForm[password]"
+                   mdInput placeholder="Password" [(ngModel)]="model.password" #password="ngModel"
+                   required>
+            <small class="error" *ngIf="Errors.password != '' ">
+              {{ Errors.password }}
+            </small>
+          </div>
+          <div class="form-group col-md-2">
+            <button type="submit" class="btn btn-default" [disabled]="loginForm.invalid && loginForm.submitted">
+              Enter
+            </button>
+          </div>
+          <div class="form-group col-xs-12">
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="remember">
+                  <input type="hidden" name="LoginForm[rememberMe]" value="0">
+                  <input type="checkbox" name="LoginForm[rememberMe]" value="1" id="rememberMe"
+                         [(ngModel)]="model.remember" #remember="ngModel">
+                  <label for="rememberMe" class="rememberLabel">Remember me</label>
+                </div>
+              </div>
+              <div class="col-xs-6 text-right">
+                <a [routerLink]="['/login/forgot-password']" class="forgot-pass">Forgot your password?</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,142 @@
+<div id="page-content">
+	<div class="container">
+		<form [formGroup]="profileForm" #formProfile="ngForm" name="profileForm" novalidate>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="add_photo">
+						<img-cropper [image]="profileImg" [settings]="profileCropper" (onCrop)="cropped($event)"
+						             [src]="profile?.profileImg"></img-cropper>
+						<span class="result" *ngIf="profileImg.image">
+                        <img [src]="profileImg.image"
+                             [width]="croppedWidth"
+                             [height]="croppedHeight" style="width: 295px; height: 295px">
+                      </span>
+					</div>
+					<small class="error" *ngIf="Errors.profileImg != '' ">
+						{{ Errors.profileImg }}
+					</small>
+				</div>
+				<div class="col-md-8">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="firstName">First name</label>
+								<input formControlName="firstName" type="text" class="form-control" id="firstName" />
+								<small class="error" *ngIf="Errors.firstName != '' ">
+									{{ Errors.firstName }}
+								</small>
+								<small class="error"
+								       *ngIf="profileForm.controls['firstName'].invalid &&
+				        (profileForm.controls['firstName'].touched || formProfile.submitted)">
+									Please enter your first name
+								</small>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="lastName">Last name</label>
+								<input formControlName="lastName" type="text" class="form-control" id="lastName" />
+								<small class="error" *ngIf="Errors.lastName != '' ">
+									{{ Errors.lastName }}
+								</small>
+								<small class="error"
+								       *ngIf="profileForm.controls['lastName'].invalid &&
+				        (profileForm.controls['lastName'].touched || formProfile.submitted)">
+									Please enter your last name
+								</small>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="dob">Date of birth</label>
+								<input formControlName="dob" type="text" class="form-control" id="dob" />
+								<small class="error" *ngIf="Errors.dob != '' ">
+									{{ Errors.dob }}
+								</small>
+								<small class="error"
+								       *ngIf="profileForm.controls['dob'].invalid &&
+				        (profileForm.controls['dob'].touched || formProfile.submitted)">
+									Please enter your date of birth
+								</small>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="location">Location</label>
+								<input formControlName="location" type="text" class="form-control" id="location" />
+								<small class="error" *ngIf="Errors.location != '' ">
+									{{ Errors.location }}
+								</small>
+								<small class="error"
+								       *ngIf="profileForm.controls['location'].invalid &&
+				        (profileForm.controls['location'].touched || formProfile.submitted)">
+									Please enter your location
+								</small>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="institution">Institution</label>
+								<input formControlName="institution" type="text" class="form-control" id="institution" />
+								<small class="error" *ngIf="Errors.institution != '' ">
+									{{ Errors.institution }}
+								</small>
+								<small class="error"
+								       *ngIf="profileForm.controls['institution'].invalid &&
+				        (profileForm.controls['institution'].touched || formProfile.submitted)">
+									Please enter your institution
+								</small>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="team">Team</label>
+								<input formControlName="team" type="text" class="form-control" id="team" />
+								<small class="error" *ngIf="Errors.team != '' ">
+									{{ Errors.team }}
+								</small>
+								<small class="error"
+								       *ngIf="profileForm.controls['team'].invalid &&
+				        (profileForm.controls['team'].touched || formProfile.submitted)">
+									Please enter your team
+								</small>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="description">Player background and info</label>
+								<textarea formControlName="description" type="text" class="form-control" id="description"
+								          cols="30"
+								          rows="4">
+				</textarea>
+								<small class="error" *ngIf="Errors.description != '' ">
+									{{ Errors.description }}
+								</small>
+								<small class="error"
+								       *ngIf="profileForm.controls['description'].invalid &&
+				        (profileForm.controls['description'].touched || formProfile.submitted)">
+									Please enter your description
+								</small>
+							</div>
+						</div>
+						<div class="col-md-12 save_btn">
+							<button type="submit" class="link-btn green-btn">Save</button>
+							<button class="btn cancel" (click)="cancel($event)">Cancel</button>
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+
+		</form>
+	</div>
+</div>
+

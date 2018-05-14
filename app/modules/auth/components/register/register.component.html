@@ -1,0 +1,96 @@
+<div class="registration-form">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 col-md-offset-5">
+        <form name="RegistrationForm" #registrationForm="ngForm" (ngSubmit)="registrationForm.form.valid && register()"
+              novalidate>
+          <h2>Registration form</h2>
+          <div class="row">
+            <div class="form-group w-help-block col-md-6">
+              <label for="exampleInputFirstName">First Name</label>
+              <input type="text" class="form-control"
+                     [ngClass]="{'field_invalid' : firstName.invalid && (firstName.dirty || firstName.touched)}"
+                     id="exampleInputFirstName" name="RegistrationForm[first_name]" mdInput
+                     [(ngModel)]="model.firstName" #firstName="ngModel" required>
+              <small class="error" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || registrationForm.submitted) ">
+                First name is required
+              </small>
+              <small class="error" *ngIf="Errors.first_name != '' ">
+                {{ Errors.first_name }}
+              </small>
+            </div>
+            <div class="form-group w-help-block col-md-6">
+              <label for="exampleInputLastName">Last Name</label>
+              <input type="text" class="form-control"
+                     [ngClass]="{'field_invalid' : lastName.invalid && (lastName.dirty || lastName.touched)}"
+                     id="exampleInputLastName" name="RegistrationForm[last_name]" mdInput [(ngModel)]="model.lastName"
+                     #lastName="ngModel" required>
+              <small class="error" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || registrationForm.submitted)  ">
+                Last name is required
+              </small>
+              <small class="error" *ngIf="Errors.last_name != '' ">
+                {{ Errors.last_name }}
+              </small>
+            </div>
+            <div class="form-group w-help-block col-md-6">
+              <label for="exampleInputLastName">Username</label>
+              <input type="text" class="form-control"
+                     [ngClass]="{'field_invalid' : username.invalid && (username.dirty || username.touched)}"
+                     id="exampleInputUserName" name="RegistrationForm[username]" mdInput [(ngModel)]="model.username"
+                     #username="ngModel" required>
+              <small class="error" *ngIf="username.invalid && (username.dirty || username.touched  || registrationForm.submitted)">
+                Username is required
+              </small>
+              <small class="error" *ngIf="Errors.username != '' ">
+                {{ Errors.username }}
+              </small>
+            </div>
+            <div class="form-group w-help-block col-md-6">
+              <label for="exampleInputEmail">Email </label>
+              <input type="email" class="form-control"
+                     [ngClass]="{'field_invalid' : email.invalid && (email.dirty || email.touched)}"
+                     id="exampleInputEmail" name="RegistrationForm[email]" mdInput [(ngModel)]="model.email"
+                     #email="ngModel" required
+                     pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+              <small class="error" *ngIf="email.invalid && (email.dirty || email.touched || registrationForm.submitted) ">
+                Email should have example@domain.com
+              </small>
+              <small class="error" *ngIf="Errors.email != '' ">
+                {{ Errors.email }}
+              </small>
+            </div>
+            <div class="form-group w-help-block col-md-6">
+              <label for="exampleInputPassword">Password</label>
+              <input type="password" class="form-control"
+                     [ngClass]="{'field_invalid' : password.invalid && (password.dirty || password.touched)}"
+                     id="exampleInputPassword" name="RegistrationForm[password]" mdInput [(ngModel)]="model.password"
+                     #password="ngModel"
+                     required minlength="6">
+              <small class="error" *ngIf="password.invalid && (password.dirty || password.touched || registrationForm.submitted)  ">
+                Password is required (minimum 6 characters)
+              </small>
+              <small class="error" *ngIf="Errors.password != '' ">
+                {{ Errors.password }}
+              </small>
+            </div>
+            <div class="form-group w-help-block col-md-6">
+              <label for="exampleInputPassword2">Confirm Passwords</label>
+              <input type="password" class="form-control"
+                     [ngClass]="{'field_invalid' : confirm.invalid && (confirm.dirty || confirm.touched)}"
+                     id="exampleInputPassword2" name="confirm" mdInput [(ngModel)]="model.confirm" #confirm="ngModel"
+                     required validateEqual="RegistrationForm[password]">
+              <small class="error" *ngIf="confirm.invalid && (confirm.dirty || confirm.touched  || registrationForm.submitted)">
+                Passwords mismatch
+              </small>
+            </div>
+            <div class="text-center col-md-12">
+              <!-- <button type="button" class="btn btn-default btn-red">Become A Player</button> -->
+              <button type="button" type="submit" class="btn btn-red full-width">Register me</button>
+              <!-- <button type="button" class="btn btn-default btn-blue">Host An Event</button> -->
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,163 @@
+<div id="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="event-filter">
+          <div class="row">
+            <div class="col-md-3">
+              <select class="selectpicker" (change)="sort($event, 'first');" [hidden]="true">
+                <option>Show</option>
+                <option>Relevance</option>
+                <option>Featured</option>
+                <option>Most Popular</option>
+                <option>Most Recent</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <select class="selectpicker" (change)="sort($event, 'second');" [hidden]="true">
+                <option>Amount to Raise</option>
+                <option>High to Low</option>
+                <option>Low to High</option>
+              </select>
+            </div>
+            <div class="col-md-5 col-md-offset-1">
+              <div class="event-search">
+                <form name="SearchEvent" class="default-search" #searchForm="ngForm" (ngSubmit)="find()">
+                  <input type="text" name="SearchEvent[search]" placeholder="Search Events" ngModel/>
+                  <i class="fa fa-search" (click)="find()"></i>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="events-listing">
+          <div *ngIf="!posts.length">
+            <h2>
+              No events found
+            </h2>
+          </div>
+
+          <div class="events-listing-item white-shadow" *ngFor="let post of posts">
+            <div class="clearfix">
+              <div class="col-sm-4 events-listing-item-img">
+                <div>
+                  <img class="img-responsive" src="{{post.logo}}"/>
+                </div>
+              </div>
+              <div class="col-sm-8 events-listing-item-desc">
+                <h2>{{post.name}}</h2>
+                <p>{{post.description}} </p>
+                <div>
+                  {{post.date_at | date:"short" }}<br/>
+                  {{post.location.description}}<br/>
+                  {{post.location.name}}
+                </div>
+              </div>
+            </div>
+            <div class="clearfix events-listing-item-action">
+              <div class="col-md-7">
+                <div class="progress">
+                  <div [ngClass]="{'progress-bar-success' : false}" class="progress-bar progress-bar-striped"
+                       role="progressbar" aria-valuenow="50"
+                       aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': post.pcAchieved + '%'}">
+                    <span>{{post.achieved }} / {{post.amount}}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <a *ngIf="userInfo.user_id === post.user_id" class="edit" routerLink="/edit-event/{{post.id}}">Edit</a>
+                <a class="link-btn lg-btn blue-btn pull-right" routerLink="/event/{{post.id}}">view more</a>
+              </div>
+            </div>
+          </div>
+
+     <!--     <div class="row" *ngIf="_pagination && (_pagination.pageCount > 1)">
+            <div class="col-md-12 text-center">
+              <nav aria-label="...">
+                <ul class="pagination">
+                  <li class="page-item" *ngFor="let _page of pages" [ngClass]="{'active' : _page.active == true}">
+                    <a class="page-link" (click)="page(_page.number)">{{_page.label}} </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div> -->
+
+  <!-- ANGULAR PAGINATION BELOW -->
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <nav aria-label="..." *ngIf="pager.totalPages - 1">
+                <ul class="pagination">
+                  <li class="page-item" [ngClass]="{disabled: pager.currentPage === 0 }">
+                      <a class="page-link" (click)="page(0)"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+                  </li>
+                  <li class="page-item"  [ngClass]="{disabled:pager.currentPage === 0}">
+                      <a class="page-link" (click)="page(pager.currentPage - 1)"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+                  </li>
+
+                  <li *ngFor="let pageItem of pager.pages" [ngClass]="{active:pager.currentPage === pageItem}" class="page-item">
+                    <a class="page-link" (click)="page(pageItem + 1)">{{pageItem + 1}}</a>
+                  </li>
+
+                  <li class="page-item"  [ngClass]="{disabled:pager.currentPage === pager.totalPages - 1}">
+                      <a class="page-link" (click)="page(pager.currentPage + 2)"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                  </li>
+                  <li class="page-item"  [ngClass]="{disabled:pager.currentPage === pager.totalPages - 1}">
+                      <a class="page-link" (click)="page(pager.totalPages)"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="gallery-list white-shadow clearfix">
+          <div class="col-md-12"><h3 class="title">Popular videos</h3></div>
+          <div class="col-md-12">
+            <div class="gallery">
+              <a href="#" class="gallery-img"
+                 style="background-image: url(assets/images/temp/gallery/gallery1.jpg)"></a>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="gallery">
+              <a href="#" class="gallery-img"
+                 style="background-image: url(assets/images/temp/gallery/gallery2.jpg)"></a>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="gallery">
+              <a href="#" class="gallery-img"
+                 style="background-image: url(assets/images/temp/gallery/gallery3.jpg)"></a>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="gallery">
+              <a href="#" class="gallery-img"
+                 style="background-image: url(assets/images/temp/gallery/gallery4.jpg)"></a>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="gallery">
+              <a href="#" class="gallery-img"
+                 style="background-image: url(assets/images/temp/gallery/gallery5.jpg)"></a>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="gallery">
+              <a href="#" class="gallery-img"
+                 style="background-image: url(assets/images/temp/gallery/gallery6.jpg)"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!--page-content-->
